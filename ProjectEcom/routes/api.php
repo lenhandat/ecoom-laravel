@@ -20,7 +20,9 @@ use App\Http\Controllers\ProductCategoryAPIController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::middleware('auth:api')->get('/user', function(Request $request) {
+    return $request->user();
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -37,6 +39,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::delete('deleteEmployee/{id}',[EmployeeController::class,'deleteEmployee']);
 
 //Get all user 
+
+
 Route::get('user',[UserAPIController::class,'getUser']);
 //Get specic user detail
 Route::get('user/{id}',[UserAPIController::class,'getUserById']);
@@ -47,6 +51,9 @@ Route::put('updateUser/{id}',[UserAPIController::class,'updateUser']);
 //Delete user
 Route::delete('deleteUser/{id}',[UserAPIController::class,'deleteUser']);
 
+Route::post('register', [UserAPIController::class,'register']);
+Route::post('login', [UserAPIController::class,'login']);
+Route::post('logout', [UserAPIController::class,'logout']);
 //Category
 //Get all Category 
 Route::get('category',[CategoryAPIController::class,'getCategory']);
